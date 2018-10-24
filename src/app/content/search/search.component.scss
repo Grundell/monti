@@ -1,0 +1,14 @@
+.search__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem;
+  margin: 2rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
+  border-radius: 1.75rem;
+  justify-items: center;
+
+  &.dark{
+    background: linear-gradient(to top, rgb(95, 17, 114), #711B86);
+    color: white;
+  }
+}

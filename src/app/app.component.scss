@@ -1,0 +1,298 @@
+@import 'main/background';
+
+.root__container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 67px auto;
+  position: relative;
+}
+
+
+/*
+================
+    Header
+================
+*/
+/*
+    Slide Menu
+*/
+.side-menu__container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 25;
+
+  &::before {
+    content: '';
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0c1066;
+    opacity: 0;
+    transition: opacity 300ms linear;
+    will-change: opacity;
+  }
+
+  &.active {
+    pointer-events: auto;
+
+    &::before{
+      opacity: 0.3;
+    }
+  }
+
+  .slide-menu {
+    box-sizing: border-box;
+    transform: translateX(-103%);
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    height: 100%;
+    width: 90%;
+    max-width: 26rem;
+    background-color: white;
+    box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 4fr 1fr;
+    grid-gap: 1rem;
+    transition: transform 300ms linear;
+    will-change: transform;
+  
+    &.active{
+      transform: none;
+    }
+  }
+
+  .menu-header {
+    background: linear-gradient(to right, rgb(255, 0, 221), #5f84fb);
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: "greeting greeting" "image details";
+    box-sizing: border-box;
+    width: 100%;
+    align-content: center;
+    color: white;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 255, 0.2);
+  }
+
+  .profile-image__container {
+    grid-area: image;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    align-self: center;
+    margin-left: 2rem;
+  }
+
+  .greeting__text {
+    grid-area: greeting;
+    font-size: 1.25rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    justify-self: center;
+    align-self: center;
+  }
+  
+  .account-details {
+    grid-area: details;
+    display: flex;
+    flex-flow: column;
+    margin-left: 1rem;
+    align-self: center;
+  }
+  
+  .name__text {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .email__text {
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+  }
+  
+  .menu-body {
+    display: grid;
+    width: 100%;
+  }
+}
+
+
+
+
+
+/*Header*/
+.main__header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.35fr 1fr ;
+  grid-template-rows: 1fr;
+  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
+  height: 4rem;
+  margin: 0;
+  align-items: center;
+  transition: background-color 500ms linear;
+  animation: 1s ease-in-out 0ms 1 fadein;
+
+  &.dark {
+    background-color: #2B244D;
+    color: white;
+  }
+
+  /*Content*/
+  .left__section {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    max-width: 5rem;
+
+    /*SVGs*/
+    .burger__icn {
+      position: relative;
+      z-index: 35;
+      height: 1rem;
+      padding: 0.5rem 1.5rem;
+      margin-right: 1rem;
+      cursor: pointer;
+
+      .burger__icn__fill {
+        fill: #2B244D;
+
+        &.dark{
+          fill: #ffff;
+        }
+      }
+    }
+  }
+
+  .center_section {
+    justify-self: center;
+
+    .brand__text {
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      display: inline;
+      margin: 0.5rem 0;
+    }
+    
+  }
+
+  .right_section {
+    justify-self: end;
+    margin-right: 1rem;
+
+    .toggle-button__container {
+      cursor: pointer;
+      position: relative;
+      margin: 0 0.5rem;
+      
+      .mode-toggle__input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+      
+      .mode-toggle__bg {
+        height: 1rem;
+        width: 2rem;
+        border-radius: 0.5rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: inline-block;
+        transition: background-color 300ms linear;
+        
+        &.checked {
+          background-color: #FF0070;
+        }
+      }
+      
+      .mode-toggle__circle {
+        height: 1.30rem;
+        width: 1.30rem;
+        background-color: #2B244D;
+        position: absolute;
+        top: -0.25rem;
+        border-radius: 50%;
+        box-shadow: 0 0 0 rgba(0, 0, 255, 0.5);
+        transition: left 300ms linear;
+        left: 0.1rem;
+        
+        &.checked {
+          background-color: white;
+          left: 1.35rem;
+        }
+      }
+      
+
+      
+      
+    }
+    
+    .mode-toggle__text {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+    }
+  }
+}
+
+
+
+/*
+================
+    Body
+================
+*/
+
+.main__container {
+  transition:  background-image 500ms ease-in-out;
+  // &.dark {
+  //   opacity: 1;
+  //   background: linear-gradient(to bottom, #B290FF, #2E1D65);
+  //   transition: opacity 300ms linear;
+  // }
+
+  @extend %background-img;
+}
+
+
+/*
+================-
+    Footer
+================
+*/
+.main__footer {
+  background: transparent;
+  position: absolute;
+  bottom: 1rem;
+  left: 1.5rem;
+  z-index: 100;
+}
+
+.copyright__text {
+  letter-spacing: 0.1rem;
+  color: white;
+}
+
+@media only screen and (max-width: 300px) {
+  .slide-menu {
+    width: 100%;
+  }
+}

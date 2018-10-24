@@ -1,0 +1,34 @@
+<mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
+<ng-container  *ngFor="let city of items$ | async">
+  <section class="card" (click)="openDetails(item)" [ngClass]="'accent-hue-' +darkModeActive + ' card'">
+    <span class="name__text">{{city?.location.name}}</span>
+    <!-- <div class="icon__container" [ngSwitch]="true">
+      <img  *ngSwitchCase="item.language === 'TypeScript'"  src="./../../../assets/img/ts.png" alt="">
+      <img  *ngSwitchCase="item.language === 'JavaScript'"  src="./../../../assets/img/js.png" alt="">
+    </div> -->
+    <div class="temperature-text__container">
+        <span class="temperature__text">{{city?.current.temp_c}}°</span>
+        <span class="temperature-metric__text"></span>
+        <span class="weather-condition__text">{{city?.current.condition.text}}</span>
+    </div>
+    <ng-container *ngFor="let forecast of city?.forecast.forecastday; index as i; first as isFirst">
+        <section class="min-max__container" *ngIf="isFirst">
+            <div class="min__container">
+                    <svg class="min-arrow__icon" viewBox="188.5 807 21 21">
+                        <path fill="#00ff9b" d="M209.5 817.5h-21L199 828z" data-name="Min Arrow"/>
+                    </svg>
+    
+                    <span class="min-temperature__text">{{forecast.day.mintemp_c}}</span>
+                    <span class="min__text">Min</span>
+                </div>
+                <div class="max__container">
+                    <svg class="max-arrow__icon" viewBox="449.5 820 21 21">
+                        <path fill="red" d="M449.5 830.5h21L460 820z" data-name="Max Arrow"/>
+                    </svg>
+                    <span class="max-temperature__text">{{forecast.day.maxtemp_c}}</span>
+                    <span class="max__text">Max</span>
+                </div>
+        </section>
+    </ng-container>    
+  </section>
+</ng-container>

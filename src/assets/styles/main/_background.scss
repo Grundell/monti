@@ -1,0 +1,138 @@
+@mixin config-background-colors($prefix, $colors...) {
+  @each $i in $colors {
+      &.#{$prefix}#{nth($i, 1)} {
+          background: nth($i, 2);
+          transition: background-color 100ms linear;
+      }
+  }
+}
+
+@mixin config-background-img($prefix, $colors...) {
+  @each $i in $colors {
+      &.#{$prefix}#{nth($i, 1)} {
+          background: url(nth($i, 2));
+          background-repeat: repeat-x;
+          background-size: contain;
+      }
+  }
+}
+
+
+
+
+
+%background-img {
+  @include config-background-img('background-hue-', 
+  '0'   '../assets/img/backgrounds/12.png',
+  '1'   '../assets/img/backgrounds/12.png',
+  '2'   '../assets/img/backgrounds/11.png',
+  '3'   '../assets/img/backgrounds/10.png',
+  '4'   '../assets/img/backgrounds/9.png',
+  '5'   '../assets/img/backgrounds/8.png',
+  '6'   '../assets/img/backgrounds/7.png',
+  '7'   '../assets/img/backgrounds/6.png',
+  '8'   '../assets/img/backgrounds/5.png',
+  '9'   '../assets/img/backgrounds/4.png',
+  '10'  '../assets/img/backgrounds/3.png',
+  '11'  '../assets/img/backgrounds/2.png',
+  '12'  '../assets/img/backgrounds/1.png',
+  '13'  '../assets/img/backgrounds/2.png',
+  '14'  '../assets/img/backgrounds/3.png',
+  '15'  '../assets/img/backgrounds/4.png',
+  '16'  '../assets/img/backgrounds/5.png',
+  '17'  '../assets/img/backgrounds/6.png',
+  '18'  '../assets/img/backgrounds/7.png',
+  '19'  '../assets/img/backgrounds/8.png',
+  '20'  '../assets/img/backgrounds/9.png',
+  '21'  '../assets/img/backgrounds/10.png',
+  '22'  '../assets/img/backgrounds/11.png',
+  '23'  '../assets/img/backgrounds/12.png',
+  )
+}
+
+%accent-img {
+  @include config-background-img('accent-hue-', 
+  '0'   '../../../assets/img/backgrounds/a12.png',
+  '1'   '../../../assets/img/backgrounds/a12.png',
+  '2'   '../../../assets/img/backgrounds/a11.png',
+  '3'   '../../../assets/img/backgrounds/a10.png',
+  '4'   '../../../assets/img/backgrounds/a9.png',
+  '5'   '../../../assets/img/backgrounds/a8.png',
+  '6'   '../../../assets/img/backgrounds/a7.png',
+  '7'   '../../../assets/img/backgrounds/a6.png',
+  '8'   '../../../assets/img/backgrounds/a5.png',
+  '9'   '../../../assets/img/backgrounds/a4.png',
+  '10'  '../../../assets/img/backgrounds/a3.png',
+  '11'  '../../../assets/img/backgrounds/a2.png',
+  '12'  '../../../assets/img/backgrounds/a1.png',
+  '13'  '../../../assets/img/backgrounds/a2.png',
+  '14'  '../../../assets/img/backgrounds/a3.png',
+  '15'  '../../../assets/img/backgrounds/a4.png',
+  '16'  '../../../assets/img/backgrounds/a5.png',
+  '17'  '../../../assets/img/backgrounds/a6.png',
+  '18'  '../../../assets/img/backgrounds/a7.png',
+  '19'  '../../../assets/img/backgrounds/a8.png',
+  '20'  '../../../assets/img/backgrounds/a9.png',
+  '21'  '../../../assets/img/backgrounds/a10.png',
+  '22'  '../../../assets/img/backgrounds/a11.png',
+  '23'  '../../../assets/img/backgrounds/a12.png',
+  )
+}
+
+%background {
+  @include config-background-colors('background-hue-',
+  '0'   linear-gradient(to bottom, #D87BFA, #252CA7),
+  '1'   linear-gradient(to bottom, #D87BFA, #252CA7),
+  '2'   linear-gradient(to bottom, #E89BEB, #2E3398), 
+  '3'   linear-gradient(to bottom, #F2BDEC, #4735A7),
+  '4'   linear-gradient(to bottom, #F7D1DB, #6F4EC7),
+  '5'   linear-gradient(to bottom, #F8E4E1, #A576BE),
+  '6'   linear-gradient(to bottom, #F5EFE1, #E4BCF0),
+  '7'   linear-gradient(to bottom, #FFFFF2, #F8D4E0),
+  '8'   linear-gradient(to bottom, #FFFFFF, #F8E5E5),
+  '9'   linear-gradient(to bottom, #FFFEFA, #FAF2ED),
+  '10'  linear-gradient(to bottom, #FFFFFF, #FCF9E8),
+  '11'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '12'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '13'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '14'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '15'  linear-gradient(to bottom, #FFFFFF, #FCF9E8),
+  '16'   linear-gradient(to bottom, #FFFEFA, #FAF2ED),
+  '17'   linear-gradient(to bottom, #FFFFFF, #F8E5E5),
+  '18'   linear-gradient(to bottom, #FFFFF2, #F8D4E0),
+  '19'   linear-gradient(to bottom, #F5EFE1, #E4BCF0),
+  '20'   linear-gradient(to bottom, #F8E4E1, #A576BE),
+  '21'   linear-gradient(to bottom, #F7D1DB, #6F4EC7),
+  '22'   linear-gradient(to bottom, #F2BDEC, #4735A7),
+  '23'   linear-gradient(to bottom, #E89BEB, #2E3398), 
+  );
+}
+
+%accent {
+  @include config-background-colors('accent-hue-',
+  '0'   linear-gradient(to bottom, #D87BFA, #252CA7),
+  '1'   linear-gradient(to bottom, #D87BFA, #252CA7),
+  '2'   linear-gradient(to bottom, #E89BEB, #2E3398), 
+  '3'   linear-gradient(to bottom, #F2BDEC, #4735A7),
+  '4'   linear-gradient(to bottom, #F7D1DB, #6F4EC7),
+  '5'   linear-gradient(to bottom, #F8E4E1, #A576BE),
+  '6'   linear-gradient(to bottom, #F5EFE1, #E4BCF0),
+  '7'   linear-gradient(to bottom, #FFFFF2, #F8D4E0),
+  '8'   linear-gradient(to bottom, #FFFFFF, #F8E5E5),
+  '9'   linear-gradient(to bottom, #FFFEFA, #FAF2ED),
+  '10'  linear-gradient(to bottom, #FFFFFF, #FCF9E8),
+  '11'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '12'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '13'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '14'  linear-gradient(to bottom, #FFFFFF, #FFFFFF),
+  '15'  linear-gradient(to bottom, #FFFFFF, #FCF9E8),
+  '16'  linear-gradient(to bottom, #FFFEFA, #FAF2ED),
+  '17'  linear-gradient(to bottom, #FFFFFF, #F8E5E5),
+  '18'  linear-gradient(to bottom, #FFFFF2, #F8D4E0),
+  '19'  linear-gradient(to bottom, #F5EFE1, #E4BCF0),
+  '20'  linear-gradient(to bottom, #F8E4E1, #A576BE),
+  '21'  linear-gradient(to bottom, #F7D1DB, #6F4EC7),
+  '22'  linear-gradient(to bottom, #F2BDEC, #4735A7),
+  '23'  linear-gradient(to bottom, #E89BEB, #2E3398),
+  );
+}

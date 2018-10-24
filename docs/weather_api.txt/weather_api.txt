@@ -1,0 +1,11 @@
+Current Weather
+HTTP: http://api.apixu.com/v1/current.json?key=eb91cfb41dca4442be7235116181710&q=Paris
+
+HTTPS: https://api.apixu.com/v1/current.json?key=eb91cfb41dca4442be7235116181710&q=Paris
+
+ 
+
+Forecast Weather
+HTTP: http://api.apixu.com/v1/forecast.json?key=eb91cfb41dca4442be7235116181710&q=Paris
+
+HTTPS: https://api.apixu.com/v1/forecast.json?key=eb91cfb41dca4442be7235116181710&q=Paris
