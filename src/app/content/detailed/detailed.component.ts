@@ -3,7 +3,9 @@ import { Store } from '@ngrx/store'
 
 import * as fromRoot from '../../app.reducer';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { UserService } from 'src/app/shared/service/user.service';
+import { isPending } from 'q';
 
 @Component({
   selector: 'app-detailed',
@@ -11,7 +13,7 @@ import { UserService } from 'src/app/shared/service/user.service';
   styleUrls: ['./detailed.component.scss']
 })
 export class DetailedComponent implements OnInit {
-  weatherData$: Observable<any>;
+  weatherData$: any;
   
   constructor(
     private store: Store<fromRoot.State>,
@@ -19,7 +21,15 @@ export class DetailedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.weatherData$ = this.store.select(fromRoot.getCurrent)
+    this.store.select(fromRoot.getCurrent).subscribe(
+      data => {
+        if(data){
+          this.weatherData$ = data;
+        } else {
+          this.userService.singleWeather();
+        }
+      }
+    )
   }
 
   addToUser(city){

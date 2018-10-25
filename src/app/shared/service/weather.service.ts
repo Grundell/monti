@@ -11,6 +11,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable()
 export class WeatherService {
   
+  weatherApi = 'https://api.apixu.com/v1/forecast.json?key=05102bb53d6d4525943135834182410&q='
+
   constructor(
     public http: HttpClient,
     private store: Store<fromRoot.State>,
@@ -18,7 +20,7 @@ export class WeatherService {
 
     getWeatherToday(city){
       city = 'Stockholm';
-      this.http.get(`https://api.apixu.com/v1/current.json?key=eb91cfb41dca4442be7235116181710&q=${city}`)
+      this.http.get(`${this.weatherApi}${city}`)
       .subscribe((data) => {
         this.store.dispatch(new UI.StopLoading());
         this.store.dispatch(new Obj.CurrentCity(data));
@@ -29,7 +31,7 @@ export class WeatherService {
     }
  
     getWeatherForcast(city){
-      this.http.get(`https://api.apixu.com/v1/forecast.json?key=eb91cfb41dca4442be7235116181710&q=${city}&days=5`)
+      this.http.get(`${this.weatherApi}${city}&days=5`)
       .subscribe((data) => {
         this.store.dispatch(new UI.StopLoading());
         this.store.dispatch(new Obj.CurrentCity(data));
@@ -40,7 +42,7 @@ export class WeatherService {
     }
 
     updateWeather(city){
-      this.http.get(`https://api.apixu.com/v1/forecast.json?key=eb91cfb41dca4442be7235116181710&q=${city}&days=5`)
+      this.http.get(`${this.weatherApi}${city}&days=5`)
       .subscribe(data => {
         this.afs.doc(`weather/${city}`).set(data)
         .then(a => console.log('success'))

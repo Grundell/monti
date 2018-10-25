@@ -5,7 +5,7 @@ import * as fromRoot from '../../app.reducer';
 import * as action from '../actions/user.actions'
 import { Usr } from '../models/usr.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { map, shareReplay, take , flatMap, switchMap, tap, distinctUntilChanged, subscribeOn} from 'rxjs/operators';
+import { map, shareReplay, take , flatMap, switchMap, tap, distinctUntilChanged, subscribeOn, switchMapTo} from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { WeatherService } from './weather.service';
@@ -21,8 +21,8 @@ export class UserService {
 
   private fbSubs: Subscription[] = [];
   uid: string;
-  private userCities$: Observable<any[]>
-
+  private userCities$: Observable<any[]>;
+  private navigationPath$: Observable<any>;
   
   constructor(
     private store: Store<fromRoot.State>,
@@ -36,6 +36,8 @@ export class UserService {
     });
 
     this.userCities$ = this.store.select(fromRoot.getCities);
+
+    this.navigationPath$ = this.store.select(fromRoot.getRouterState);
    }
 
    // User data from DB
@@ -70,6 +72,7 @@ export class UserService {
     })
   }
 
+// Get weather based on cities associated with
 async getUserWeather(){
   await this.userCities$.pipe(
       distinctUntilChanged(),
@@ -98,5 +101,24 @@ async getUserWeather(){
       });
   }
 
+  // Get weather based on URL params
+  async singleWeather(){
+    await this.navigationPath$.pipe(
+      take(1),
+      map(data => data.state.params.city),
+      map(data => {
+        return this.afs.doc(`weather/${data}`).valueChanges()
+          .pipe(
+            map(data => data)
+          )
+        }),
+      flatMap(fobjs => combineLatest(fobjs))
+      ).subscribe(data => {
+        console.log('this is from subs', data[0])
+        if(data[0]){
+          this.store.dispatch(new Obj.CurrentCity(data[0])) 
+        }
+      });
+    
+  }
 }
-

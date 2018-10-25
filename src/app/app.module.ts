@@ -22,6 +22,10 @@ import { DetailedComponent } from './content/detailed/detailed.component';
 import { SearchComponent } from './content/search/search.component';
 import { WeekdayDirective } from './shared/directive/weekday.directive';
 import { WeekdayPipe } from './shared/pipe/weekday.pipe';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { CustomRouterStateSerializer } from './shared/reducers/router.reducer';
+import { ClearCurrentResolver } from './shared/resolver/clearCurrent.resolver';
+
 
 @NgModule({
   declarations: [
@@ -46,10 +50,15 @@ import { WeekdayPipe } from './shared/pipe/weekday.pipe';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    StoreRouterConnectingModule.forRoot(),
     SharedModule,
     MaterialModule
   ],
-  providers: [UiService],
+  providers: [
+    UiService,
+    {provide: RouterStateSerializer, useClass: CustomRouterStateSerializer},
+    ClearCurrentResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

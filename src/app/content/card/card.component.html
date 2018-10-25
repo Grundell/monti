@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
 <ng-container  *ngFor="let city of items$ | async">
-  <section class="card" (click)="openDetails(item)" [ngClass]="'accent-hue-' +darkModeActive + ' card'">
+  <section class="card" (click)="openDetails(city)" [ngClass]="'accent-hue-' +darkModeActive + ' card'">
     <span class="name__text">{{city?.location.name}}</span>
     <!-- <div class="icon__container" [ngSwitch]="true">
       <img  *ngSwitchCase="item.language === 'TypeScript'"  src="./../../../assets/img/ts.png" alt="">

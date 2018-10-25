@@ -3,9 +3,6 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../app.reducer';
 import {Observable} from 'rxjs';
 import { UiService } from '../shared/ui.service';
-import { NgIf } from '@angular/common';
-import { timer } from 'rxjs';
-import { timeInterval, pluck, take} from 'rxjs/operators';
 import { WeatherService } from '../shared/service/weather.service';
 import { UserService } from '../shared/service/user.service';
 

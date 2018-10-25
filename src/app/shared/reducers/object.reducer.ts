@@ -46,7 +46,7 @@ export function objectReducer(state = initialState, action: ObjActions) {
     case REMOVE_SELECTED:
       return {
         ...state,
-        selectedItem: null
+        currentCity: null
       }
     default: {
       return state;

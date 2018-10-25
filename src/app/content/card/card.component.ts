@@ -50,7 +50,7 @@ export class CardComponent implements OnInit {
 
 
   openDetails(item){
-    this.store.dispatch(new Obj.SelectedItem(item));
-    this.router.navigate(['/detailed', item.id])
+    this.store.dispatch(new Obj.CurrentCity(item));
+    this.router.navigate(['/detailed', item.location.name])
   }
 }
