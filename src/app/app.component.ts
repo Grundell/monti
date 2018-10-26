@@ -12,7 +12,7 @@ import { UserService } from './shared/service/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewChecked {
+export class AppComponent implements OnInit {
   showMenu = false;
   darkModeActive: any;
 
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public authService: AuthService,
     public usrService: UserService
     ) {
+      // Anon login user 
+      this.authService.login();
   }
   interval$ = interval(2000).pipe(take(24));
 
@@ -30,36 +32,14 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.ui.darkModeState.subscribe((value) => {
       this.darkModeActive = value;
     });
-    
-    // this.interval$.subscribe(data => {
-    //   console.log(data)
-    //   this.darkModeActive = data;
-    // })
 
+    // Initialize user data
     this.authService.initAuthListener();
-   
-  }
-
-  ngAfterViewChecked(){
-    navigator.geolocation.getCurrentPosition(success => {
-      /* Do some magic. */
-      console.log('tehere is the location', success )
-    }, failure => {
-      if (failure.message.startsWith("Only secure origins are allowed")) {
-        // Secure Origin issue.
-        console.log('Secure origin ')
-      } else {
-        console.log('terrible stuff');
-      }
-    });
+    this.usrService.getUser();   
   }
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
-  }
-
-  modeToggleSwitch() {
-    // this.ui.darkModeState.next(!this.darkModeActive);
   }
 
 }

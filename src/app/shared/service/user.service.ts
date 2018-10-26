@@ -5,7 +5,7 @@ import * as fromRoot from '../../app.reducer';
 import * as action from '../actions/user.actions'
 import { Usr } from '../models/usr.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { map, shareReplay, take , flatMap, switchMap, tap, distinctUntilChanged, subscribeOn, switchMapTo} from 'rxjs/operators';
+import { map, shareReplay, take , flatMap, switchMap, tap, distinctUntilChanged, mergeMap} from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { WeatherService } from './weather.service';
@@ -46,17 +46,22 @@ export class UserService {
       this.afs.doc<Usr>(`user/${user.uid}`).valueChanges()
       .subscribe(
         data => {
-         this.store.dispatch(new action.SetUsrCities(data.cities))
+          if(data) {
+            this.store.dispatch(new action.SetUsrCities(data.cities))
+          }
         }
       )
     });
   }
 
-
+  updateCities(cities){
+    this.afs.doc(`user/${this.uid}`).set({cities: cities})
+    .catch(err => console.log('Shit hit the fan and I can\'t write to db right now', err) );
+  }
   // Add City to user doc
   addCityUser(city){
     this.userCities$.pipe(take(1)).subscribe( userCities => {
-      this.afs.doc(`user/${this.uid}`).update({cities: [...userCities,
+      this.afs.doc(`user/${this.uid}`).set({cities: [...userCities,
         city] })
       .then(a => this.updateWeather())
       .catch(err => console.log('Shit hit the fan and I can\'t write to db right now', err) );
@@ -106,17 +111,16 @@ async getUserWeather(){
     await this.navigationPath$.pipe(
       take(1),
       map(data => data.state.params.city),
-      map(data => {
-        return this.afs.doc(`weather/${data}`).valueChanges()
+      map(city => {
+        return this.afs.doc(`weather/${city}`).valueChanges()
           .pipe(
-            map(data => data)
+            map(weather => weather)
           )
         }),
-      flatMap(fobjs => combineLatest(fobjs))
+      mergeMap(fobjs => fobjs)
       ).subscribe(data => {
-        console.log('this is from subs', data[0])
-        if(data[0]){
-          this.store.dispatch(new Obj.CurrentCity(data[0])) 
+        if(data){
+          this.store.dispatch(new Obj.CurrentCity(data)) 
         }
       });
     

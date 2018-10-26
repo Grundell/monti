@@ -1,43 +1,41 @@
-<ng-container *ngIf="weatherData$ as data">
+<ng-container *ngIf="(weatherData$ | async) as data">
   <div  class="detailed__card">
     <div class="detailed__top">
       <div class="location">
         <div class="country">
-          {{data.item.location.country}}
+          {{data.location.country}}
         </div>
         <div class="city__text">
-          <h1>{{data.item.location.name}}</h1>
+          <h1>{{data.location.name}}</h1>
         </div>
       </div>
       <div class="local__time">
-          <h1>{{data.item.location.localtime | date:'hh:mm'}}</h1>
+          <h1>{{data.location.localtime | date:'hh:mm'}}</h1>
       </div>
       <div class="current__weather">
           <div class="current__weather-description">
             Current Weather
           </div>
           <div class="current__weather-temp">
-              <h1>{{data.item.current.temp_c}} ° </h1>      
+              <h1>{{data.current.temp_c}} ° </h1>      
           </div>
       </div>
       
     </div>
     <div class="detailed__content-forecast">
-        <div class="forecast-card" *ngFor="let forecast of data.item.forecast.forecastday">
-          {{forecast.date | weekday }}
+        <div class="forecast-card" *ngFor="let forecast of data.forecast.forecastday; first as isFirst">
+          <div class="weekday__text" *ngIf="!isFirst; else today">
+            <h3>{{forecast.date | weekday }}</h3>
+          </div>
+          <ng-template #today>
+            <h3>Today</h3>
+          </ng-template>
+          <app-weather-icon [icon]="forecast.day.condition.code"></app-weather-icon>
+          <div class="temperature">
+            <h3>{{forecast.day.avgtemp_c}}°</h3>
+          </div> 
         </div>    
-
-      <div class="temperature">
-        
-      </div> 
-      <div class="illustration">
-          <svg class="svg">
-              <use xlink:href="../../../assets/img/weatherIcons/weather_icons-01.svg#Dibujo"></use>
-          </svg>
-      </div>
     </div>
-    <div class="detailed__foot">
-      <button mat-raised-button color="primary" (click)="addToUser(data.item.location.name)">Add to home</button>
-    </div>
+    <app-actions [path]="path" [city]="data.location.name"></app-actions>
   </div>
-</ng-container>
+</ng-container> 

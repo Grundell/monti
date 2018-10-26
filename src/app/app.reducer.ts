@@ -42,3 +42,5 @@ export const getUserState = createFeatureSelector<fromUser.State>('user');
 export const getCities = createSelector(getUserState, fromUser.getCities);
 
 export const getRouterState = createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>('router');
+
+

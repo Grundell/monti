@@ -31,9 +31,7 @@ export class HomeComponent implements OnInit {
       this.darkModeActive = value;
     });
 
-    this.usrService.getUser();
 
-    // this.search('Stockholm');
   }
 
   search(city){

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store'
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Location } from '@angular/common';
 
 import * as fromRoot from '../../app.reducer';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map, tap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/shared/service/user.service';
-import { isPending } from 'q';
+import { Router } from '@angular/router';
+import * as Obj from '../../shared/actions/object.actions'
+
 
 @Component({
   selector: 'app-detailed',
@@ -13,27 +16,44 @@ import { isPending } from 'q';
   styleUrls: ['./detailed.component.scss']
 })
 export class DetailedComponent implements OnInit {
-  weatherData$: any;
-  
+  weatherData$: Observable<any>;
+  path: any;
+
   constructor(
     private store: Store<fromRoot.State>,
-    private userService: UserService
-  ) { }
-
-  ngOnInit() {
-    this.store.select(fromRoot.getCurrent).subscribe(
+    private userService: UserService,
+    private router : Router,
+    private location: Location
+  ) {
+    this.store.select(fromRoot.getRouterState).subscribe(
       data => {
-        if(data){
-          this.weatherData$ = data;
+        if(data.state.url === '/'){
+          this.path = 'home';
         } else {
-          this.userService.singleWeather();
+          this.path = 'detailed'
         }
       }
     )
-  }
+   }
 
-  addToUser(city){
-    this.userService.addCityUser(city);
+  ngOnInit() {
+    switch (this.path){
+      case "home": {
+        this.weatherData$ = this.store.select(fromRoot.getCurrent);
+        break;
+      }
+      case "detailed" : {
+        this.weatherData$ = this.store.select(fromRoot.getCurrent).pipe(
+          map(data => {
+            if (data) { 
+              return data 
+            } else if(!data){
+              this.userService.singleWeather();
+            }
+          }),
+        );
+        break;
+      }
+    }
   }
-
 }

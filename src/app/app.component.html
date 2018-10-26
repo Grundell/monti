@@ -52,7 +52,7 @@
 
     <div class="right_section">
       <div class="mode-toggle__container">
-        <span class="mode-toggle__text">Light</span>
+        <!-- <span class="mode-toggle__text">Light</span>
   
         <label class="toggle-button__container">
           <input (click)="modeToggleSwitch()" type="checkbox" class="mode-toggle__input"/>
@@ -60,14 +60,11 @@
           <span [ngClass]="{'checked': darkModeActive}" class="mode-toggle__circle"></span>
         </label>
     
-        <span class="mode-toggle__text">Dark</span>
+        <span class="mode-toggle__text">Dark</span> -->
       </div>
     </div>
   </header>
-  <!-- [ngClass]="'background-hue-' +darkModeActive + ' main__container'" -->
   <main class="main__container" [ngClass]="'background-hue-' +darkModeActive + ' main__container'"   >
-  <!-- <main class="main__container" [ngClass]="{'dark': darkModeActive}"> -->
-
         <router-outlet></router-outlet>
   </main>
 </div>

@@ -2,6 +2,7 @@
 <ng-container  *ngFor="let city of items$ | async">
   <section class="card" (click)="openDetails(city)" [ngClass]="'accent-hue-' +darkModeActive + ' card'">
     <span class="name__text">{{city?.location.name}}</span>
+    <app-weather-icon [icon]="city.current.condition.code" ></app-weather-icon>
     <!-- <div class="icon__container" [ngSwitch]="true">
       <img  *ngSwitchCase="item.language === 'TypeScript'"  src="./../../../assets/img/ts.png" alt="">
       <img  *ngSwitchCase="item.language === 'JavaScript'"  src="./../../../assets/img/js.png" alt="">

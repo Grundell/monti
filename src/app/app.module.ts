@@ -25,6 +25,8 @@ import { WeekdayPipe } from './shared/pipe/weekday.pipe';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './shared/reducers/router.reducer';
 import { ClearCurrentResolver } from './shared/resolver/clearCurrent.resolver';
+import { WeatherIconComponent } from './content/weather-icon/weather-icon.component';
+import { ActionsComponent } from './content/detailed/actions/actions.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { ClearCurrentResolver } from './shared/resolver/clearCurrent.resolver';
     DetailedComponent,
     SearchComponent,
     WeekdayDirective,
-    WeekdayPipe
+    WeekdayPipe,
+    WeatherIconComponent,
+    ActionsComponent
   ],
   imports: [
     BrowserModule,

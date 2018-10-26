@@ -36,7 +36,7 @@ export function objectReducer(state = initialState, action: ObjActions) {
     case SET_CURRENT_CITY:
       return {
         ...state,
-        currentCity: action
+        currentCity: action.item
       };
     case SET_MYITEMS:
       return {

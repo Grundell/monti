@@ -7,7 +7,10 @@ import { ClearCurrentResolver } from './shared/resolver/clearCurrent.resolver'
 const routes: Routes = [
   { path:'', 
     component: HomeComponent,
-    resolve: { data: ClearCurrentResolver}
+    resolve: { 
+      // If navigate with browser back btn
+      data: ClearCurrentResolver
+    }
   },
   { path:'detailed/:city', component: DetailedComponent}
 ];

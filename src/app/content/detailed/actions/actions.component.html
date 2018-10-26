@@ -1,0 +1,11 @@
+<div *ngIf="path === 'home'; else detailed" class="detailed__foot">
+    <button mat-raised-button color="primary" (click)="addToUser(city)">Add to home</button>
+    <button mat-raised-button color="warn" (click)="close()">Close</button>
+</div>
+<ng-template #detailed>
+  <div class="detailed__foot">
+    <button mat-raised-button color="primary" (click)="removeCity()">Remove city</button> 
+    <button mat-raised-button color="warn" (click)="close()">Close</button> 
+  </div>
+    
+</ng-template>
