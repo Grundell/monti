@@ -1,9 +1,11 @@
-<div class="search__container" >
-  <div class="search__text"> 
+<div class="search__container" [ngClass]="'accent-hue-' + ui" >
+  <!-- <div class="search__text"> 
     <h3>Search for a City</h3>
-  </div>
+  </div> -->
   <div class="search__input_container">
-      <input class="search__input" [(ngModel)]="searchString" maxlength="100" (keydown.enter)="submit()">
-      <button (click)="submit()" class="button is-info" [disabled]="!searchString">Send</button>
+      <mat-form-field [style.fontSize]="25">
+          <mat-label>Search for a City</mat-label>
+          <input matInput [(ngModel)]="searchString" maxlength="100" (keydown.enter)="submit()">
+        </mat-form-field>
   </div>
 </div>

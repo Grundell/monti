@@ -7,9 +7,17 @@ Weather Card Styling
 */
 
 :host {
-  display: flex; 
-  flex-wrap: wrap;
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
+
+  @media screen and (max-width: 1285px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
@@ -17,10 +25,11 @@ Weather Card Styling
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   justify-items: center;
+  justify-self: center;
   width: 19rem;
   cursor: pointer;
   border-radius: 1.75rem;
-  // animation: 1.25s ease-in-out 0ms 1 fadein;
+
   
   transition:  background-image 500ms ease-in-out;
   @extend %accent-img;
@@ -114,7 +123,7 @@ Weather Card Styling
 }
 
 .min__text {
-  color: #00FF9B;
+  color: #6c6cce;
 }
 
 .max__text, .min__text {

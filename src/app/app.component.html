@@ -2,21 +2,31 @@
 <aside class="side-menu__container" [ngClass]="{'active': showMenu}" (click)="toggleMenu()">
     <nav class="slide-menu" [ngClass]="{'active': showMenu}" (click)="$event.stopImmediatePropagation();">
       <section class="menu-header">
-          <span class="greeting__text">Welcome Back</span>
+          <span class="greeting__text">Welcome to Monti</span>
           <div class="profile-image__container">
             <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/03/73/24/6057b9dacef0403.jpg" alt="profile-image"
                  class="profile__image">
           </div>
           <div class="account-details">
               <span class="name__text">Max Grundell</span>
-              <span class="email__text"> 10 cities</span>
+              <span class="email__text"> A demo application</span>
           </div>
       </section>
       <section class="menu-body">
-        <!-- Here goes menu -->
+          <div class="explination">
+            <p>This is a demo applicaiton built with Angular & Firebase - API from apixu.
+            <br/><br/>
+            • The application fetches data from external API and stores it in DB under "Weather". <br/>
+            • User associates this data with his acc and subscribe to the "Weather" from DB. <br/>
+            •  If data is older than 1h it will be refetched from API on DB read. 
+            <br/><br/>
+            The application takes advantage of ngrx-store, to change the UI based on what time of day it is and controll dataflow. 
+            <br/><br/>
+            </p>
+          </div>
       </section>
       <section class="menu-footer">
-        <!-- Here goes menu-foot -->
+          Inspiration for this app is taken from: <a href="https://github.com/hamedbaatour/Minimus">https://github.com/hamedbaatour/Minimus</a>
       </section>
     </nav>
 </aside>

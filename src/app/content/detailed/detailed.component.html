@@ -1,5 +1,5 @@
 <ng-container *ngIf="(weatherData$ | async) as data">
-  <div  class="detailed__card">
+  <div  class="detailed__card" [ngClass]="'accent-hue-' + darkModeActive + ' detailed__card'">
     <div class="detailed__top">
       <div class="location">
         <div class="country">
@@ -10,6 +10,7 @@
         </div>
       </div>
       <div class="local__time">
+          <div class="last_updated">Last Updated</div>
           <h1>{{data.location.localtime | date:'hh:mm'}}</h1>
       </div>
       <div class="current__weather">

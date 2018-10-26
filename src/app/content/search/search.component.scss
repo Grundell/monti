@@ -1,3 +1,5 @@
+@import 'main/background';
+
 .search__container {
   display: grid;
   grid-template-columns: 1fr;
@@ -7,8 +9,10 @@
   border-radius: 1.75rem;
   justify-items: center;
 
-  &.dark{
-    background: linear-gradient(to top, rgb(95, 17, 114), #711B86);
-    color: white;
+  @extend %accent-img;
+
+  mat-form-field{
+    width: 300px;
+    font-size: 2rem;
   }
 }

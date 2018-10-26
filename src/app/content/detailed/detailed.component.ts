@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Location } from '@angular/common';
 
@@ -8,6 +8,8 @@ import { map, tap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/shared/service/user.service';
 import { Router } from '@angular/router';
 import * as Obj from '../../shared/actions/object.actions'
+import { UiService } from 'src/app/shared/ui.service';
+
 
 
 @Component({
@@ -18,12 +20,13 @@ import * as Obj from '../../shared/actions/object.actions'
 export class DetailedComponent implements OnInit {
   weatherData$: Observable<any>;
   path: any;
+  darkModeActive: any;
 
   constructor(
     private store: Store<fromRoot.State>,
     private userService: UserService,
     private router : Router,
-    private location: Location
+    public ui: UiService,
   ) {
     this.store.select(fromRoot.getRouterState).subscribe(
       data => {
@@ -37,6 +40,11 @@ export class DetailedComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    this.ui.darkModeState.subscribe((value) => {
+      this.darkModeActive = value;
+    });
+
     switch (this.path){
       case "home": {
         this.weatherData$ = this.store.select(fromRoot.getCurrent);

@@ -132,7 +132,16 @@
   
   .menu-body {
     display: grid;
-    width: 100%;
+    padding: 1.2rem;
+
+    p {
+      line-height: 1.75rem;
+    }
+  }
+
+  .menu-footer{
+    padding:1.2rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -262,13 +271,7 @@
 */
 
 .main__container {
-  transition:  background-image 500ms ease-in-out;
-  // &.dark {
-  //   opacity: 1;
-  //   background: linear-gradient(to bottom, #B290FF, #2E1D65);
-  //   transition: opacity 300ms linear;
-  // }
-
+  margin-top: -3px;
   @extend %background-img;
 }
 
@@ -284,11 +287,6 @@
   bottom: 1rem;
   left: 1.5rem;
   z-index: 100;
-}
-
-.copyright__text {
-  letter-spacing: 0.1rem;
-  color: white;
 }
 
 @media only screen and (max-width: 300px) {
