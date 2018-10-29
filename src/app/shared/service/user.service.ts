@@ -20,7 +20,7 @@ import {Weather} from '../models/weather.model'
 export class UserService {
 
   private fbSubs: Subscription[] = [];
-  uid: string;
+  uid: any;
   private userCities$: Observable<any[]>;
   private navigationPath$: Observable<any>;
   
@@ -30,9 +30,9 @@ export class UserService {
     private afAuth: AngularFireAuth,
     private weatherService: WeatherService
   ) { 
-    // User data from store
+
     this.store.select(fromRoot.getUID).subscribe(data => {
-      this.uid = data
+          this.uid = data
     });
 
     this.userCities$ = this.store.select(fromRoot.getCities);
@@ -41,18 +41,18 @@ export class UserService {
    }
 
    // User data from DB
-   getUser() {
-    this.afAuth.authState.subscribe(user => {
-      this.afs.doc<Usr>(`user/${user.uid}`).valueChanges()
-      .subscribe(
-        data => {
-          if(data) {
-            this.store.dispatch(new action.SetUsrCities(data.cities))
+    getUser() {
+     this.afAuth.authState.subscribe(user => {
+      this.afs.doc<Usr>(`user/${this.uid}`).valueChanges()
+        .subscribe(
+          data => {
+            if(data) {
+              this.store.dispatch(new action.SetUsrCities(data.cities))
+            }
           }
-        }
-      )
-    });
-  }
+        )
+      })
+    }
 
   updateCities(cities){
     this.afs.doc(`user/${this.uid}`).set({cities: cities})

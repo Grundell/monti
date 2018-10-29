@@ -13,7 +13,6 @@ const initialState: State = {
 export function userReducer(state = initialState, action: UserActions) {
   switch (action.type) {
     case SET_USER_CITIES:
-    console.log(action.payload)
       return {
         ...state,
         cities: action.payload

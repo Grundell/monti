@@ -27,6 +27,7 @@ import { CustomRouterStateSerializer } from './shared/reducers/router.reducer';
 import { ClearCurrentResolver } from './shared/resolver/clearCurrent.resolver';
 import { WeatherIconComponent } from './content/weather-icon/weather-icon.component';
 import { ActionsComponent } from './content/detailed/actions/actions.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ActionsComponent } from './content/detailed/actions/actions.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

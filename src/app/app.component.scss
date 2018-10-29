@@ -72,6 +72,10 @@
     &.active{
       transform: none;
     }
+
+    @media only screen and (max-width: 650px) {
+      width: 100%;
+    }
   }
 
   .menu-header {
@@ -144,10 +148,6 @@
     line-height: 1.75rem;
   }
 }
-
-
-
-
 
 /*Header*/
 .main__header {
@@ -248,10 +248,6 @@
           left: 1.35rem;
         }
       }
-      
-
-      
-      
     }
     
     .mode-toggle__text {
@@ -289,8 +285,8 @@
   z-index: 100;
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 650px) {
   .slide-menu {
-    width: 100%;
+   width: 100%;
   }
 }

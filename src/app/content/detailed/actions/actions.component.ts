@@ -57,7 +57,6 @@ export class ActionsComponent implements OnInit {
   }
 
   removeCity(){
-    console.log();
     let index = this.cities.indexOf(this.city);
     this.cities.splice(index, 1)
     this.userService.updateCities(this.cities);

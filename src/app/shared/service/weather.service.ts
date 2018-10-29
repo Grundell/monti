@@ -45,7 +45,6 @@ export class WeatherService {
       this.http.get(`${this.weatherApi}${city}&days=5`)
       .subscribe(data => {
         this.afs.doc(`weather/${city}`).set(data)
-        .then(a => console.log('success'))
         .catch(err => console.log(
           'err', err
         ));

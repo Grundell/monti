@@ -4,6 +4,8 @@ import { AuthService } from './shared/service/auth.service';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UserService } from './shared/service/user.service';
+import {Store } from '@ngrx/store';
+import * as fromRoot from './app.reducer';
 
 @Component({
   selector: 'app-root',
@@ -17,20 +19,25 @@ export class AppComponent implements OnInit {
   constructor(
     public ui: UiService,
     public authService: AuthService,
-    public usrService: UserService
+    public usrService: UserService,
+    public store: Store<fromRoot.State>
     ) {
       // Anon login user 
       this.authService.login();
-  }
-  interval$ = interval(2000).pipe(take(24));
+    }
   ngOnInit() {
     this.ui.darkModeState.subscribe((value) => {
       this.darkModeActive = value;
     });
-
     // Initialize user data
     this.authService.initAuthListener();
-    this.usrService.getUser();   
+    this.store.select(fromRoot.getAuthState).subscribe(
+      data => {
+        if(data.authID) {
+          this.usrService.getUser();   
+        }
+      }
+    )
   }
 
   toggleMenu() {

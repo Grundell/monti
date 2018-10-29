@@ -15,7 +15,6 @@ export class AuthService {
     private store   : Store<fromRoot.State>) { }
   
   initAuthListener() {
-    console.log('auth init')
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.store.dispatch(new Auth.SetAuthenticated());
